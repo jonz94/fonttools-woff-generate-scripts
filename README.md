@@ -1,5 +1,5 @@
-# WOFF generate scripts
-![License: Unlicense](https://img.shields.io/github/license/jonz94/woff-generate-scripts)
+# fonttools WOFF generate scripts
+![License: 0BSD](https://img.shields.io/github/license/jonz94/fonttools-woff-generate-scripts)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Generate `woff`/`woff2` fonts from `ttf`/`otf` fonts using [`fonttools`](https://github.com/fonttools/fonttools) python library
