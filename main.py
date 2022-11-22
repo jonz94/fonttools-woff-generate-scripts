@@ -1,21 +1,26 @@
 import os
 from fontTools.ttLib import TTFont
+from pathlib import Path
 
 
 def generate_font(inputsDir, outputsDir, filename, inputFormat, outputFormat):
-    print(f"generating {filename.replace(inputFormat, outputFormat)}...")
+    inputPath = Path.joinpath(inputsDir, filename)
+    outputFilename = filename.replace(inputFormat, outputFormat)
+    outputPath = Path.joinpath(outputsDir, outputFilename)
 
-    font = TTFont(inputsDir + filename)
+    print(f"generating {outputFilename}...")
+
+    font = TTFont(inputPath)
     font.flavor = outputFormat
-    font.save(outputsDir + filename.replace(inputFormat, outputFormat))
+    font.save(outputPath)
     font.close()
 
 
 def main():
-    workspace = os.path.abspath(__file__).replace("/main.py", "")
+    projectRoot = Path(__file__).parent
 
-    inputsDir = f"{workspace}/inputs/"
-    outputsDir = f"{workspace}/outputs/"
+    inputsDir = Path.joinpath(projectRoot, "inputs")
+    outputsDir = Path.joinpath(projectRoot, "outputs")
 
     for file in os.listdir(os.fsencode(inputsDir)):
         filename = os.fsdecode(file)
