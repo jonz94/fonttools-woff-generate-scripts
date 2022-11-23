@@ -3,9 +3,9 @@ from fontTools.ttLib import TTFont
 from pathlib import Path
 
 
-def generate_font(inputsDir, outputsDir, filename, inputFormat, outputFormat):
+def generate_font(inputsDir, outputsDir, filename, outputFormat):
     inputPath = Path.joinpath(inputsDir, filename)
-    outputFilename = filename.replace(inputFormat, outputFormat)
+    outputFilename = inputPath.with_suffix(f".{outputFormat}").name
     outputPath = Path.joinpath(outputsDir, outputFilename)
 
     print(f"generating {outputFilename}...")
@@ -26,14 +26,14 @@ def main():
         filename = os.fsdecode(file)
 
         if filename.endswith(".ttf"):
-            inputFormat = "ttf"
+            pass
         elif filename.endswith(".otf"):
-            inputFormat = "otf"
+            pass
         else:
             continue
 
-        generate_font(inputsDir, outputsDir, filename, inputFormat, "woff")
-        generate_font(inputsDir, outputsDir, filename, inputFormat, "woff2")
+        generate_font(inputsDir, outputsDir, filename, "woff")
+        generate_font(inputsDir, outputsDir, filename, "woff2")
 
 
 if __name__ == "__main__":
